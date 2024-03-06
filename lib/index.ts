@@ -45,15 +45,17 @@ export default class {
         this.postBotStats()
     }
 
-    commandRun(commandName: string, userID: string) {
+    commandRun(commandName: string, userID?: string) {
         if (!commandName || commandName.trim() === "") return new TypeError("No command name provided to commandRun().")
 
         const commandRun = this.commandsRun.get(commandName)
         this.commandsRun.set(commandName, commandRun ? (commandRun + 1) : 1)
 
 
-        const userCommandsRun = this.activeUsers.get(userID)
-        this.activeUsers.set(userID, userCommandsRun ? (userCommandsRun + 1) : 1)
+        if (userID){
+            const userCommandsRun = this.activeUsers.get(userID)
+            this.activeUsers.set(userID, userCommandsRun ? (userCommandsRun + 1) : 1)
+        }   
     }
 
     addCustom() {
@@ -72,7 +74,7 @@ export default class {
                     // @ts-ignore
                     "shardCount": this.discordClient.shards.size,
 
-                    // "userCount": 366051,
+                    "userCount": this.activeUsers.size,
 
                     // @ts-ignore
                     "members": this.discordClient.guilds.reduce((a, i) => a + i.memberCount, 0)
@@ -86,7 +88,7 @@ export default class {
                     // @ts-ignore
                     "shardCount": this.discordClient.shard ? this.discordClient.shard.count : 1,
 
-                    // "userCount": 366051,
+                    "userCount": this.activeUsers.size,
 
                     // @ts-ignore
                     "members": this.discordClient.guilds.cache.reduce((a, i) => a + i.memberCount, 0)
