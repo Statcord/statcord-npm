@@ -1,0 +1,58 @@
+{
+  "name": "statcord-npm",
+  "version": "1.6.0",
+  "description": "A NodeJS library for posting Discord bot stats to statcord.com",
+  "main": "./dist/lib/index.js",
+  "types": "./dist/lib/index.d.ts",
+  "module": "./index.mjs",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/lib/index.d.ts",
+      "bun": "./dist/lib/index.js",
+      "require": "./dist/lib/index.js",
+      "import": "./esm.mjs"
+    }
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.json && cp -r lib/types dist/lib/types"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Statcord/statcord-npm.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "bot-stats",
+    "bot-tracking",
+    "djs",
+    "discordjs",
+    "discord.js",
+    "eris",
+    "oceanic.js",
+    "oceanic",
+    "dcbot",
+    "discordbot",
+    "discord-bot",
+    "discord-bot-stats",
+    "statcord",
+    "statcord.com"
+  ],
+  "author": "numselli",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Statcord/statcord-npm/issues"
+  },
+  "homepage": "https://github.com/Statcord/statcord-npm#readme",
+  "devDependencies": {
+    "@favware/npm-deprecate": "^1.0.7",
+    "@types/node": "^20.11.21",
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.13.0"
+  }
+}
