@@ -34,16 +34,7 @@ export interface postObject {
     ramUsage?: number
     totalRam?: number
     cpuUsage?: number
-
-    // "customCharts": [
-    //     {
-    //     "id": "customChartOne",
-    //     "data": {
-    //         "itemOne": 213,
-    //         "itemTwo": 2.13
-    //     }
-    //     }
-    // ],
+    customCharts?: customChartBody
     // "topCommands": [
     //     {
     //     "name": "help",
@@ -52,10 +43,7 @@ export interface postObject {
     // ]
 }
 
-export interface customBody {
-    // "id": "customChartOne",
-    // "data": {
-    //     "itemOne": 213,
-    //     "itemTwo": 2.13
-    // }
+export interface customChartBody {
+    "id": string,
+    "data": object
 }

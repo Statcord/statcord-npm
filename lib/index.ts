@@ -58,9 +58,8 @@ export default class {
         }   
     }
 
-    addCustom() {
-        // this.customCharts
-
+    addCustom(chartID: string, data: object, ) {
+        this.customCharts.set(chartID, data)
     }
 
 
@@ -134,7 +133,16 @@ export default class {
         return {
             ...this.getHostUsage(),
             ...this.getBotStats(),
-            ...this.getcommandUsage()
+            ...this.getcommandUsage(),
+            ...this.getCustomCharts()
+        }
+    }
+
+    private getCustomCharts() {
+        return {
+            "customCharts": Array.from(this.customCharts, ([id, data]) => {
+                return { id, data };
+            })
         }
     }
 
