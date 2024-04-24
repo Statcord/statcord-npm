@@ -1,7 +1,7 @@
 import type { optionsType, postObject } from "./types/types";
 import os from "node:os"
 
-const baseURL = "https://beta.statcord.com"
+const baseURL = "https://statcord.com"
 
 export default class {
     private apiKey: string
@@ -161,15 +161,15 @@ export default class {
     }
 
     private post(body: postObject) {
-        console.log(body)
-        // const fetchResult = fetch(`${baseURL}/api/bots/${this.botId}/stats`, {
-        //     "method": "post",            
-        //     "headers": {
-        //         "Content-Type": "application/json",
-        //         'Authorization': this.apiKey
-        //     },
-        //     "body": JSON.stringify(body)
-        // })
+        // console.log(body)
+        const fetchResult = fetch(`${baseURL}/api/bots/${this.botId}/stats`, {
+            "method": "post",            
+            "headers": {
+                "Content-Type": "application/json",
+                'Authorization': this.apiKey
+            },
+            "body": JSON.stringify(body)
+        })
 
         this.commandsRun.clear() 
     }
