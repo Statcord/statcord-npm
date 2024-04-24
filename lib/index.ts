@@ -1,4 +1,4 @@
-import type { optionsType, postObject, customBody } from "./types/types";
+import type { optionsType, postObject } from "./types/types";
 import os from "node:os"
 
 const baseURL = "https://beta.statcord.com"
@@ -13,13 +13,16 @@ export default class {
     private activeUsers: Map<string, number>
     private customCharts: Map<string, object>
 
-    private autoPosting: boolean
+    private autoPostingStarted: boolean
     private autoPostingInterval: number
 
     private totalRam: number
 
+    private getUserCount: Function | undefined
+
     constructor(options: optionsType) {
-        if (!options.apiKey || !options.botId) throw new TypeError("No API key or bot Id provided.")
+        if (!options.apiKey) throw new TypeError("No API key provided.")
+        if (!options.botId) throw new TypeError("No bot ID provided.")
         if (!options.discordLibrary) throw new TypeError("No discord Library provided.")
         if (!options.discordClient) throw new TypeError("No discord Library provided.")
 
@@ -28,7 +31,7 @@ export default class {
         this.discordLibrary = options.discordLibrary
         this.discordClient = options.discordClient
 
-        this.autoPosting = false
+        this.autoPostingStarted = false
         this.autoPostingInterval = options.autoPostingInterval ?? 60
 
         this.totalRam = os.totalmem()
@@ -36,11 +39,13 @@ export default class {
         this.commandsRun = new Map()
         this.activeUsers = new Map()
         this.customCharts = new Map()
+
+        if (options.overrideGetUserCount) this.getUserCount = options.overrideGetUserCount
     }
 
     startAutoPost() {
-        if (!this.autoPosting) setInterval(this.postBotStats, this.autoPostingInterval * 1000)
-        this.autoPosting = true
+        if (!this.autoPostingStarted) setInterval(this.postBotStats, this.autoPostingInterval * 1000)
+        this.autoPostingStarted = true
 
         this.postBotStats()
     }
@@ -64,6 +69,7 @@ export default class {
 
 
     private getBotStats() {
+        const customUserCount = this.getUserCount ? this.getUserCount() : undefined
         switch (this.discordLibrary) {
             case "eris":
             case "oceanic.js": {
@@ -73,7 +79,7 @@ export default class {
                     // @ts-ignore
                     "shardCount": this.discordClient.shards.size,
 
-                    "userCount": this.activeUsers.size,
+                    "userCount": customUserCount ?? this.activeUsers.size,
 
                     // @ts-ignore
                     "members": this.discordClient.guilds.reduce((a, i) => a + i.memberCount, 0)
@@ -87,7 +93,7 @@ export default class {
                     // @ts-ignore
                     "shardCount": this.discordClient.shard ? this.discordClient.shard.count : 1,
 
-                    "userCount": this.activeUsers.size,
+                    "userCount": customUserCount ?? this.activeUsers.size,
 
                     // @ts-ignore
                     "members": this.discordClient.guilds.cache.reduce((a, i) => a + i.memberCount, 0)
@@ -147,7 +153,7 @@ export default class {
     }
 
     postBotStats(stats?: object) {
-        if (!this.autoPosting && !stats) return new TypeError("No stats to post.")
+        if (!this.autoPostingStarted && !stats) return new TypeError("No stats to post.")
 
         const statsToPost = stats ? stats : this.getAllStats()
    
@@ -165,6 +171,6 @@ export default class {
         //     "body": JSON.stringify(body)
         // })
 
-        // this.commandsRun.clear() 
+        this.commandsRun.clear() 
     }
 }

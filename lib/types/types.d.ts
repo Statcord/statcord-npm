@@ -24,6 +24,11 @@ export interface optionsType {
      * @defaultValue null
     */
     discordLibrary: "discord.js" | "oceanic.js" | "eris"
+    /**
+     * set a callback function to get a custom user count
+     * @defaultValue null
+    */
+    overrideGetUserCount?: Function
 }
 
 export interface postObject {
