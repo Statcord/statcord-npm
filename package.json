@@ -1,6 +1,6 @@
 {
   "name": "statcord-npm",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A NodeJS library for posting Discord bot stats to statcord.com",
   "main": "./dist/lib/index.js",
   "types": "./dist/lib/index.d.ts",
@@ -15,7 +15,7 @@
     }
   },
   "scripts": {
-    "build": "rm -rf dist && tsc -p tsconfig.json && cp -r lib/types dist/lib/types"
+    "build": "rm -rf dist && tsc -p tsconfig.json"
   },
   "repository": {
     "type": "git",
