@@ -1,0 +1,33 @@
+{
+    "compilerOptions": {
+      "outDir": "dist/lib",
+      "lib": [
+        "ESNext"
+      ],
+      "module": "ESNext",
+      "target": "ESNext",
+      "inlineSourceMap": true,
+      "importHelpers": true,
+      "newLine": "LF",
+      "noFallthroughCasesInSwitch": true,
+      "noImplicitOverride": true,
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "moduleResolution": "node",
+      "ignoreDeprecations": "5.0",
+      "allowUnusedLabels": false,
+      "allowUnreachableCode": false,
+      "importsNotUsedAsValues": "error",
+      "checkJs": true,
+      "strictPropertyInitialization": true,
+      "strictBindCallApply": true,
+      "declaration": true,
+      "noEmitOnError": true,
+      "allowSyntheticDefaultImports": true,
+      "resolveJsonModule": true
+    },
+    "include": ["lib/**/*.ts"],
+    "exclude": ["node_modules", "dist", "test"]
+  }

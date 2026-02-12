@@ -1,11 +1,58 @@
 {
   "name": "statcord-npm",
-  "version": "0.0.1",
-  "description": "The official npm package for the statcord project",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "version": "1.0.2",
+  "description": "A NodeJS library for posting Discord bot stats to statcord.com",
+  "main": "./dist/lib/index.js",
+  "types": "./dist/lib/index.d.ts",
+  "module": "./index.mjs",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/lib/index.d.ts",
+      "bun": "./dist/lib/index.js",
+      "require": "./dist/lib/index.js",
+      "import": "./esm.mjs"
+    }
   },
-  "author": "",
-  "license": "ISC"
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Statcord/statcord-npm.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "bot-stats",
+    "bot-tracking",
+    "djs",
+    "discordjs",
+    "discord.js",
+    "eris",
+    "oceanic.js",
+    "oceanic",
+    "dcbot",
+    "discordbot",
+    "discord-bot",
+    "discord-bot-stats",
+    "statcord",
+    "statcord.com"
+  ],
+  "author": "numselli",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Statcord/statcord-npm/issues"
+  },
+  "homepage": "https://github.com/Statcord/statcord-npm#readme",
+  "devDependencies": {
+    "@favware/npm-deprecate": "^1.0.7",
+    "@types/node": "^20.12.7",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": ">=18.13.0"
+  }
 }
